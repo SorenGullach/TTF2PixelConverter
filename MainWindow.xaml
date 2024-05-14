@@ -1,0 +1,98 @@
+﻿<Window x:Class="TTF2PixelConverter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="True Type Font to Pixel converter" WindowState="Maximized">
+
+    <Grid>
+        <!-- Main layout -->
+        <StackPanel Orientation="Vertical" Margin="5">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <!-- Display resolution -->
+                <GroupBox Header="Display resolution" Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Width" Margin="5"/>
+                        <TextBox MinWidth="50" Text="{Binding DisplayWidth}"/>
+                        <TextBlock Text="Height" Margin="5"/>
+                        <TextBox MinWidth="50" Text="{Binding DisplayHeight}"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Font -->
+                <GroupBox Header="Font" Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Family" Margin="5"/>
+                        <ComboBox MinWidth="150" Margin="5" SelectedItem="{Binding FontFamily}"/>
+                        <TextBlock Text="Size" Margin="5"/>
+                        <ComboBox MinWidth="50" Margin="5" SelectedItem="{Binding FontSize}"/>
+                        <Button Content="Create font file" Margin="5" Padding="5" Command="{Binding CreateFontCommand}"/>
+                        <Button Content="Create all fonts" Margin="5" Padding="5" Command="{Binding CreateAllFontCommand}"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Select char -->
+                <GroupBox Header="Select char" Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox MinWidth="50" Margin="5" SelectedItem="{Binding CharSelect}"/>
+                        <Image Source="{Binding CharBMP}"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Pixel threshold -->
+                <GroupBox Header="Pixel threshold" Margin="5">
+                    <StackPanel Orientation="Vertical" Width="200">
+                        <Slider Minimum="0" Maximum="254" Value="{Binding Threshold}"  />
+                        <TextBlock Text="{Binding Threshold}" TextAlignment="Center"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Bits / Pixel -->
+                <GroupBox Header="Bits / Pixel" Margin="5">
+                    <StackPanel Orientation="Vertical" Width="200">
+                        <Slider Minimum="1" Maximum="8" Value="{Binding BitsPerPixel}"  />
+                        <TextBlock Text="{Binding BitsPerPixel}" TextAlignment="Center" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
+            <!-- Progress bar -->
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <ProgressBar Height="20" Width="500" Margin="5,0,5,0" Value="{Binding ProgressFontsValue}" Minimum="{Binding ProgressFontsMin}" Maximum="{Binding ProgressFontsMax}"/>
+                <TextBlock Text="{Binding FileName}" Margin="5,0,5,0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <!-- Font display -->
+                <GroupBox Header="Sample" Grid.Column="0" >
+                    <Grid Name="imgFontGrid" Background="Black" Margin="5" Width="{Binding FontGridWidth}" Height="{Binding FontGridHeight}">
+                        <Image Name="imgFont" Source="{Binding FontBMP}" />
+                    </Grid>
+                </GroupBox>
+
+                <!-- Pixel grid -->
+                <GroupBox Header="Pixels" Margin="5" Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+                            <ItemsControl Background="Gray" ItemsSource="{Binding Pixels}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Rows="{Binding PixelRows}" Columns="{Binding PixelCols}"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Ellipse Width="10" Height="10">
+                                            <Ellipse.Fill>
+                                                <SolidColorBrush Color="{Binding MyColor}"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                        <TextBlock MinWidth="50" Margin="5" Text="{Binding uiPixelData}" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

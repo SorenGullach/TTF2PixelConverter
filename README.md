@@ -7,3 +7,5 @@ The `PixelDataCPP` class encapsulates properties and methods related to pixel da
 The `PixelData` class inherits from `PixelDataCPP` and extends its functionality by implementing methods for filling image data from pixel data, generating string representations of pixel data, and saving pixel data lists to files. It includes private fields for storing pixel data, constants for bits per byte, and a constructor for initializing pixel data. The class also overrides the `ToString` method to provide a string representation of the pixel data and implements methods for filling image data from pixel data and saving pixel data lists to files.
 
 Together, these classes offer a comprehensive solution for converting TrueType fonts into pixel data and saving the pixel data in C++ format, enabling seamless integration into C++ projects for embedded systems or other applications requiring pixel manipulation and rendering.
+
+![App image](https://github.com/SorenGullach/TTF2PixelConverter/blob/master/Font%20app.png)
